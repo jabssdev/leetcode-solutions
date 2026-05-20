@@ -17,6 +17,7 @@ A partir de esta definición, podemos derivar la relación de recurrencia que no
 $$\binom{n}{i} = \binom{n}{i-1} \cdot \frac{n - i + 1}{i}$$
 
 Esta deducción matemática es la clave del algoritmo:
+
 1. Empezamos la fila con el caso base `row[0] = 1`.
 2. Para cada posición $i$ subsecuente (desde $1$ hasta $K$), calculamos su valor en tiempo constante $O(1)$ multiplicando el valor anterior `row[i-1]` por la fracción del coeficiente $\frac{K - i + 1}{i}$.
 3. Al hacer esto en una sola pasada, reducimos drásticamente la complejidad temporal de $O(K^2)$ a $O(K)$ utilizando únicamente la memoria estrictamente necesaria para la respuesta.
@@ -28,7 +29,7 @@ Esta deducción matemática es la clave del algoritmo:
   - **Inserción Dinámica**: Se utiliza el método nativo `.push()` para ir construyendo el arreglo secuencialmente de izquierda a derecha.
 
 - **PHP**:
-  - **Moldeo Explícito a Entero (`(int)`)**: En PHP, la función `round()` realiza el redondeo matemático correcto pero devuelve un valor de tipo `float`. Dado que la firma del método requiere retornar un arreglo de enteros (`Integer[]`), se realiza un *casting* o moldeo explícito a entero utilizando `(int)`. Esto asegura la integridad del tipo del dato almacenado, evitando que variables flotantes se infiltren en un arreglo tipado.
+  - **Moldeo Explícito a Entero (`(int)`)**: En PHP, la función `round()` realiza el redondeo matemático correcto pero devuelve un valor de tipo `float`. Dado que la firma del método requiere retornar un arreglo de enteros (`Integer[]`), se realiza un _casting_ o moldeo explícito a entero utilizando `(int)`. Esto asegura la integridad del tipo del dato almacenado, evitando que variables flotantes se infiltren en un arreglo tipado.
   - **Sintaxis de Agregación Eficiente**: Se utiliza el operador de corchete vacío `$row[] = ...`, el cual es un constructor interno de PHP optimizado para apilar elementos al final de un arreglo de forma más rápida que con llamadas a funciones de librería.
 
 ## Lecciones Clave

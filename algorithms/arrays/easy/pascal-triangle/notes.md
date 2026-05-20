@@ -10,6 +10,7 @@
 El problema consiste en generar el Triángulo de Pascal hasta un número determinado de filas. La regla de construcción establece que cada número en el triángulo es igual a la suma de los dos números situados inmediatamente encima de él.
 
 Este ejercicio representa un ejemplo clásico y perfecto de **Programación Dinámica (Dynamic Programming)** bajo el enfoque de **Tabulación (Bottom-Up)**:
+
 1. Definimos una base de caso sumamente simple: la primera fila es siempre `[1]`.
 2. Para construir cualquier celda subsecuente `newRow[j]` en una fila `i`, no realizamos cálculos recursivos costosos (lo cual llevaría a un árbol de llamadas exponencial y redundante). En su lugar, reutilizamos los subproblemas ya resueltos y almacenados en la fila anterior: `prevRow[j - 1] + prevRow[j]`.
 3. Reconocemos que las fronteras de cada fila (el primer y el último elemento) no tienen dos elementos superiores para sumar; matemáticamente siempre valen `1`. Por lo tanto, inicializamos cada fila con `[1]`, calculamos los elementos intermedios mediante la relación de recurrencia DP en un bucle acotado, y cerramos la fila añadiendo un `1` al final.

@@ -7,9 +7,10 @@
 
 ## Intuición y Enfoque
 
-La fusión estándar de dos arreglos ordenados utilizando la técnica clásica de **Dos Punteros (Two Pointers)** normalmente se realiza de izquierda a derecha. Sin embargo, aplicar este enfoque tradicional *in-place* en `nums1` requeriría desplazar continuamente los elementos hacia la derecha para evitar sobrescribirlos, lo que elevaría la complejidad temporal a un costoso $O(m \cdot n)$ debido a los costes de desplazamiento de memoria. Para evitar esto con espacio $O(1)$, se requeriría espacio temporal adicional de $O(m)$ para guardar una copia de `nums1`.
+La fusión estándar de dos arreglos ordenados utilizando la técnica clásica de **Dos Punteros (Two Pointers)** normalmente se realiza de izquierda a derecha. Sin embargo, aplicar este enfoque tradicional _in-place_ en `nums1` requeriría desplazar continuamente los elementos hacia la derecha para evitar sobrescribirlos, lo que elevaría la complejidad temporal a un costoso $O(m \cdot n)$ debido a los costes de desplazamiento de memoria. Para evitar esto con espacio $O(1)$, se requeriría espacio temporal adicional de $O(m)$ para guardar una copia de `nums1`.
 
 El enfoque óptimo rompe esta limitación mediante el uso de **Tres Punteros desde el Extremo Posterior (Right-to-Left / Rear-to-Front Two Pointers)**:
+
 1. Dado que `nums1` viene pre-dimensionado con un tamaño físico de $m + n$ (donde los últimos $n$ espacios están vacíos o rellenos con ceros), el final de `nums1` es una "zona segura" libre de colisiones.
 2. Posicionamos los punteros de lectura al final de las secciones útiles de cada arreglo: `p1` en la posición $m - 1$ de `nums1` y `p2` en $n - 1$ de `nums2`. El puntero de escritura `p` se sitúa en el extremo final de `nums1` ($m + n - 1$).
 3. Comparamos los elementos más grandes en los extremos de lectura. El valor mayor se copia en la posición `p` y se decrementa el puntero correspondiente y el de escritura `p`.
@@ -22,10 +23,10 @@ El enfoque óptimo rompe esta limitación mediante el uso de **Tres Punteros des
   - **Mutabilidad por Referencia Nativa**: En JavaScript, los arreglos se pasan por referencia. Cualquier asignación a `nums1[p]` modifica el arreglo original directamente en el ámbito global del llamador.
 
 - **PHP**:
-  - **Paso por Referencia Explícito (`&`)**: PHP maneja los arreglos por valor (bajo el mecanismo interno *copy-on-write*) a menos que se indique lo contrario. Para cumplir con la restricción *in-place* de LeetCode, la firma de la función requiere el operador de referencia explícito: `&$nums1`. Sin el `&`, las modificaciones solo afectarían a una copia local de la función y no al arreglo original.
+  - **Paso por Referencia Explícito (`&`)**: PHP maneja los arreglos por valor (bajo el mecanismo interno _copy-on-write_) a menos que se indique lo contrario. Para cumplir con la restricción _in-place_ de LeetCode, la firma de la función requiere el operador de referencia explícito: `&$nums1`. Sin el `&`, las modificaciones solo afectarían a una copia local de la función y no al arreglo original.
   - **Elegancia de Control**: A diferencia de la versión en JS, la solución en PHP no incluye una salida temprana explícita para `$n === 0`. No obstante, el diseño del bucle es inherentemente elegante: si `$n === 0`, el puntero `$p2` se inicializa como `-1`, haciendo que la condición del `while ($p2 >= 0)` falle de inmediato y termine la ejecución de manera limpia sin alterar el arreglo, logrando el mismo efecto de forma implícita.
 
 ## Lecciones Clave
 
-- **Punteros Inversos en Operaciones In-Place**: Siempre que se deba modificar una estructura de datos *in-place* sin sobreescribir información útil ni pagar costes por desplazamientos ($O(N)$ por inserción), debemos explorar la posibilidad de procesar la entrada de atrás hacia adelante (de derecha a izquierda). Este patrón es sumamente útil en manipulación de arreglos y cadenas.
+- **Punteros Inversos en Operaciones In-Place**: Siempre que se deba modificar una estructura de datos _in-place_ sin sobreescribir información útil ni pagar costes por desplazamientos ($O(N)$ por inserción), debemos explorar la posibilidad de procesar la entrada de atrás hacia adelante (de derecha a izquierda). Este patrón es sumamente útil en manipulación de arreglos y cadenas.
 - **Optimización por Condición de Parada Asimétrica**: No todas las iteraciones que involucran múltiples punteros deben durar hasta que todos los punteros se agoten. En este ejercicio, identificar que el arreglo destino es el propio `nums1` nos permite detener el proceso tan pronto como `nums2` (`p2 < 0`) esté completamente vacío, ahorrando pasos innecesarios y demostrando una comprensión profunda de la estructura de los datos involucrados.

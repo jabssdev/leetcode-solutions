@@ -9,9 +9,10 @@
 
 El problema nos pide encontrar el elemento mayoritario que aparece estrictamente más de $\lfloor N/2 \rfloor$ veces en un arreglo. Una aproximación intuitiva inicial podría ser el uso de una tabla de frecuencia (Hash Map) para contar las ocurrencias de cada elemento, lo cual tomaría $O(N)$ de tiempo pero requeriría $O(N)$ de espacio auxiliar. Otra opción sería ordenar el arreglo y devolver el elemento central en $nums[\lfloor N/2 \rfloor]$, tomando $O(N \log N)$ de tiempo.
 
-Para alcanzar el óptimo absoluto de $O(N)$ en tiempo y $O(1)$ en espacio, se utiliza el **Algoritmo de Votación de Boyer-Moore**. 
+Para alcanzar el óptimo absoluto de $O(N)$ en tiempo y $O(1)$ en espacio, se utiliza el **Algoritmo de Votación de Boyer-Moore**.
 
 La intuición fundamental de este algoritmo es una **guerra de desgaste o cancelación de votos**:
+
 1. Visualizamos el arreglo como una votación donde el elemento mayoritario y los demás elementos compiten. Dado que el elemento mayoritario aparece más de la mitad de las veces, incluso si todos los demás elementos se aliaran para votar en su contra (cancelar sus votos), el mayoritario siempre tendrá al menos un voto a su favor restante al final.
 2. Mantenemos un `candidate` y un contador `count`.
 3. Si el `count` llega a 0, significa que los votos a favor de nuestro candidato han sido completamente anulados por elementos distintos; por tanto, establecemos el elemento actual como el nuevo `candidate`.

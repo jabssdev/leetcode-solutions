@@ -7,9 +7,10 @@
 
 ## Intuición y Enfoque
 
-El problema se resuelve de manera óptima utilizando un **enfoque codicioso (Greedy)** y una sola pasada (*Single Pass*). La intuición fundamental radica en que, para maximizar la ganancia, debemos comprar al precio más bajo posible y vender en un día posterior que maximice la diferencia. 
+El problema se resuelve de manera óptima utilizando un **enfoque codicioso (Greedy)** y una sola pasada (_Single Pass_). La intuición fundamental radica en que, para maximizar la ganancia, debemos comprar al precio más bajo posible y vender en un día posterior que maximice la diferencia.
 
 En lugar de evaluar todas las combinaciones posibles de días de compra y venta (que tomaría un tiempo ineficiente de $O(N^2)$), iteramos a través de los precios manteniendo dos estados dinámicos:
+
 1. El precio mínimo visto hasta el día actual (`minPrice`).
 2. El beneficio máximo obtenido hasta el momento (`maxProfit`).
 

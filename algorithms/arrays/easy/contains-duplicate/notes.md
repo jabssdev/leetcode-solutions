@@ -10,11 +10,12 @@
 El objetivo de este problema es detectar la presencia de al menos un elemento duplicado en una colección. La fuerza bruta requeriría comparar cada elemento con todos los demás usando dos bucles anidados, lo que resultaría en una complejidad temporal ineficiente de $O(N^2)$. Alternativamente, podríamos ordenar el arreglo primero, reduciendo el tiempo a $O(N \log N)$ y el espacio a $O(1)$ (o $O(N)$ dependiendo del algoritmo de ordenación), pero comprometiendo el tiempo de ejecución.
 
 El enfoque óptimo elegido utiliza una **tabla de dispersión (Hash Table / Set)**. La intuición detrás de esta técnica es la memorización de elementos ya procesados. A medida que recorremos el arreglo:
+
 1. Comprobamos de manera instantánea si el elemento actual ya ha sido registrado en nuestra estructura hash.
 2. Si ya existe, retornamos inmediatamente `true` (detección temprana de duplicados).
 3. Si no existe, lo agregamos al conjunto y continuamos.
 
-Esta técnica de *trade-off* (intercambio de memoria por velocidad) reduce la complejidad temporal de $O(N^2)$ a $O(N)$ a expensas de un uso de espacio auxiliar de $O(N)$, lo cual es ideal para conjuntos de datos grandes.
+Esta técnica de _trade-off_ (intercambio de memoria por velocidad) reduce la complejidad temporal de $O(N^2)$ a $O(N)$ a expensas de un uso de espacio auxiliar de $O(N)$, lo cual es ideal para conjuntos de datos grandes.
 
 ## Notas Políglotas (JavaScript vs PHP)
 
@@ -30,5 +31,5 @@ Esta técnica de *trade-off* (intercambio de memoria por velocidad) reduce la co
 
 ## Lecciones Clave
 
-- **La Técnica del Conjunto de Visitas (Visited Set Pattern)**: Es uno de los patrones más fundamentales en algoritmos de arreglos y grafos. Debe aplicarse siempre que necesitemos realizar un seguimiento de elementos previos para validar condiciones de unicidad, ciclos, o relaciones de coincidencia (por ejemplo, en *Two Sum* o detección de ciclos en listas enlazadas), logrando búsquedas en $O(1)$.
+- **La Técnica del Conjunto de Visitas (Visited Set Pattern)**: Es uno de los patrones más fundamentales en algoritmos de arreglos y grafos. Debe aplicarse siempre que necesitemos realizar un seguimiento de elementos previos para validar condiciones de unicidad, ciclos, o relaciones de coincidencia (por ejemplo, en _Two Sum_ o detección de ciclos en listas enlazadas), logrando búsquedas en $O(1)$.
 - **Trade-off de Espacio vs Tiempo**: Este problema ilustra perfectamente cómo la introducción de memoria adicional ($O(N)$ de espacio auxiliar) permite rebajar drásticamente la barrera de rendimiento temporal de un algoritmo de cuadrático a lineal. Es una decisión de diseño crucial en el software de producción, donde la memoria suele ser barata y el tiempo de respuesta del usuario es prioritario.

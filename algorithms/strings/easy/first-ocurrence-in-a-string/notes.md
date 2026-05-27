@@ -7,17 +7,19 @@
 
 ## Intuición y Enfoque
 
-El problema es la búsqueda de una subcadena (`needle`) dentro de otra cadena (`haystack`), retornando el índice de la primera ocurrencia o `-1` si no existe. Es el problema canónico de **String Matching** (*Pattern Matching*) en Ciencias de la Computación.
+El problema es la búsqueda de una subcadena (`needle`) dentro de otra cadena (`haystack`), retornando el índice de la primera ocurrencia o `-1` si no existe. Es el problema canónico de **String Matching** (_Pattern Matching_) en Ciencias de la Computación.
 
 Ambas soluciones implementan el **Algoritmo de Búsqueda Naïve con Ventana Deslizante** —la solución de fuerza bruta que es también la base conceptual de algoritmos más avanzados como KMP, Boyer-Moore y Rabin-Karp— sin embargo, difieren en su implementación interna de la comparación, lo que genera diferencias en asignación de memoria:
 
 **JavaScript — Comparación por Extracción de Subcadena**:
+
 - El bucle exterior desliza una ventana de tamaño `nLen` sobre `haystack`.
 - En cada posición `i`, extrae la subcadena `haystack.substring(i, i + nLen)` y la compara directamente con `needle` usando el operador `===`.
 - La comparación `===` entre strings en JavaScript realiza una comparación lexicográfica carácter a carácter internamente, con cortocircuito en el primer carácter no coincidente.
 - El límite del bucle `i < hLen - nLen + 1` garantiza que solo se visitan posiciones donde una coincidencia completa es posible.
 
 **PHP — Comparación por Bucle Carácter a Carácter con Salida Temprana**:
+
 - El bucle exterior recorre las posiciones de inicio con el límite inclusivo `i <= hLen - nLen`.
 - Un bucle interior explícito compara cada carácter `$haystack[$i + $j]` contra `$needle[$j]`.
 - Si hay un desacuerdo, `break` sale del bucle interior inmediatamente (salida temprana óptima sin asignación de subcadenas).
